@@ -54,12 +54,29 @@ catPrototype = makeMammal({
   hello_text : 'meow'
   });
 
+giraffePrototype = makeMammal({
+  neck_length : 0,
+  hello_text : 'silence'
+});
+
 // ** cat constructor
 makeCat = function( arg_map ) {
   var cat = Object.create( catPrototype );
   extendObject( cat, arg_map );
   return cat;
   };
+
+// ** giraffe constructor
+makeGiraffe = function( arg_map ) {
+  var giraffe = Object.create( giraffePrototype );
+  extendObject( giraffe, arg_map);
+  return giraffe;
+};
+
+jerryGiraffe = makeGiraffe({
+  name: 'Jerry',
+  next_length : 15
+});
 
 // ** cat instance
 garfieldCat = makeCat({
@@ -70,4 +87,6 @@ garfieldCat = makeCat({
 // ** cat instance method invocations
 garfieldCat.say_hello();
 garfieldCat.say_text('Purr...');
+jerryGiraffe.say_hello();
+jerryGiraffe.say_text('Rrrrrrrr');
 
