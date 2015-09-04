@@ -1,0 +1,29 @@
+var curryLog, logHello, logStayinAlive, logGoodbye;
+
+curryLog = function ( arg_text ){
+  var log_it = function (){ console.log( arg_text ); };
+  return log_it;
+};
+
+logHello      = curryLog('hello');
+logStayinAlive = curryLog('stayin alive!');
+logGoodbye    = curryLog('goodbye');
+
+// This creates no reference to the execution context,
+// and therefore the execution context object can be
+// immediately purged by the JavaScript garbage collector
+curryLog('fred');
+
+logHello();      // logs 'hello'
+logStayinAlive(); // logs 'stayin alive!'
+logGoodbye();    // logs 'goodbye'
+logHello();      // logs 'hello' again
+
+// destroy reference to 'hello' execution context
+delete window.logHello;
+
+// destroy reference to 'stayin alive!' execution context
+delete window.logStayinAlive;
+
+logGoodbye();    // logs 'goodbye'
+logStayinAlive(); // undefined - execution context destroyed
